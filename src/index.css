@@ -329,10 +329,6 @@ p {
   transition: all 0.3s;
 }
 
-.--btn:hover {
-  transform: translateY(-2px);
-}
-
 .--btn-lg {
   padding: 8px 10px;
 }
@@ -490,11 +486,6 @@ a {
 
 ul {
   list-style: none;
-}
-
-a:hover {
-  /* color: var(--color-dark); */
-  font-size: 1.5rem;
 }
 
 .ql-editor {

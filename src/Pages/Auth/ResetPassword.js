@@ -21,10 +21,10 @@ const ResetPassword = () => {
 
                         <div className={styles.links}>
                             <p>
-                                <Link to='/'>- Home</Link>
+                                <Link to='/'>Home</Link>
                             </p>
                             <p>
-                                <Link to='/login'>- Login</Link>
+                                <Link to='/login'>Login</Link>
                             </p>
                         </div>
                     </form>
