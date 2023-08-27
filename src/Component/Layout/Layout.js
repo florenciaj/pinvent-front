@@ -6,7 +6,6 @@ const Layout = ({ children }) => {
     return (
         <>
             <Header></Header>
-
             <div style={{ minHeight: '80vh' }} className='--pad'>
                 {children}
             </div>
