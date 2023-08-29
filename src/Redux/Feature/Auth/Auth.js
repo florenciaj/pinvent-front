@@ -4,7 +4,7 @@ const name = JSON.parse(localStorage.getItem("name"));
 
 const initialState = {
   isLoggedIn: false,
-  name: name ?? "Humann",
+  name: name ?? "Human",
   user: {
     name: "",
     email: "",

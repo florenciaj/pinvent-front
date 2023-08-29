@@ -5,12 +5,26 @@ export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const registerUser = async (userData) => {
     try {
-        console.log('BACKEND_URL');
-        console.log(BACKEND_URL);
         const response = await axios.post(`${BACKEND_URL}/user/register`, userData);
 
         if (response.statusText === "Ok") {
             toast.success("Registered");
+        }
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        toast.error(message);
+    }
+};
+
+export const loginUser = async (userData) => {
+    try {
+        const response = await axios.post(`${BACKEND_URL}/user/login`, userData);
+
+        if (response.statusText === "Ok") {
+            toast.success("Welcome!");
         }
         return response.data;
     } catch (error) {
