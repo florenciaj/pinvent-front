@@ -33,7 +33,7 @@ const Login = () => {
             return toast.error('All fields are required');
         }
         if (!validateEmail(email)) {
-            return toast.error("Please enter a valid email");
+            return toast.error("Use a valid email");
         }
 
         const userData = {

@@ -38,7 +38,7 @@ const Register = () => {
       return toast.error("Passwords must be up to 6 characters");
     }
     if (!validateEmail(email)) {
-      return toast.error("Please enter a valid email");
+      return toast.error("Use a valid email");
     }
     if (password !== confirmPassword) {
       return toast.error("Passwords do not match");

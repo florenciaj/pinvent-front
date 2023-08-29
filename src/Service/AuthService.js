@@ -7,7 +7,7 @@ export const registerUser = async (userData) => {
     try {
         const response = await axios.post(`${BACKEND_URL}/user/register`, userData);
 
-        if (response.statusText === "Ok") {
+        if (response.statusText === 200) {
             toast.success("Registered");
         }
         return response.data;
@@ -22,10 +22,7 @@ export const registerUser = async (userData) => {
 export const loginUser = async (userData) => {
     try {
         const response = await axios.post(`${BACKEND_URL}/user/login`, userData);
-
-        if (response.statusText === "Ok") {
-            toast.success("Welcome!");
-        }
+        toast.success("Welcome!");
         return response.data;
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) ||
@@ -38,10 +35,20 @@ export const loginUser = async (userData) => {
 export const logoutUser = async () => {
     try {
         const response = await axios.get(`${BACKEND_URL}/user/logout`);
+        toast.success("Bye!");
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        toast.error(message);
+    }
+};
 
-        if (response.statusText === "Ok") {
-            toast.success("Bye!");
-        }
+export const forgotPasswordUser = async (userData) => {
+    try {
+        const response = await axios.post(`${BACKEND_URL}/user/forgot-password`, userData);
+        toast.success("Mail sent successfully");
         return response.data;
     } catch (error) {
         const message = (error.response && error.response.data && error.response.data.message) ||
