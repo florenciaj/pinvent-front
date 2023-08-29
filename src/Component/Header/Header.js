@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { SET_LOGIN } from '../../Redux/Feature/Auth/Auth';
+import { SET_LOGIN, selectName } from '../../Redux/Feature/Auth/Auth';
 import { logoutUser } from '../../Service/AuthService';
-
 const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const name = useSelector(selectName);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const logout = async () => {
@@ -22,7 +23,7 @@ const Header = () => {
             <div className="--flex-between">
                 <h3>
                     <span className='--fw-thin'>Welcome, </span>
-                    <span className='--color-danger'>Human</span>
+                    <span className='--color-danger'>{name}</span>
                 </h3>
 
                 <button className="--btn --btn-danger" onClick={logout}>Logout</button>
