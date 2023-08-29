@@ -35,6 +35,22 @@ export const loginUser = async (userData) => {
     }
 };
 
+export const logoutUser = async () => {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/user/logout`);
+
+        if (response.statusText === "Ok") {
+            toast.success("Bye!");
+        }
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        toast.error(message);
+    }
+};
+
 export const validateEmail = (email) => {
     return email.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
