@@ -58,6 +58,19 @@ export const forgotPasswordUser = async (userData) => {
     }
 };
 
+export const resetPasswordUser = async (userData, resetToken) => {
+    try {
+        const response = await axios.put(`${BACKEND_URL}/user/reset-password/${resetToken}`, userData);
+        toast.success("Password changed successfully");
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        toast.error(message);
+    }
+};
+
 export const validateEmail = (email) => {
     return email.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
