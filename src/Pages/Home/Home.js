@@ -2,6 +2,7 @@ import React from 'react';
 import { RiProductHuntLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import HeroImg from '../../Assets/inv-img.png';
+import { ShowOnLogin, ShowOnLogout } from '../../Component/Protect/HiddenLink';
 import './Home.scss';
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
                 </div>
 
                 <ul className="home-links">
+                    <ShowOnLogout>
                     <li>
                         <Link to='/register'>Register</Link>
                     </li>
@@ -21,11 +23,14 @@ const Home = () => {
                             <Link to='/login'>Login</Link>
                         </button>
                     </li>
+                    </ShowOnLogout>
+                    <ShowOnLogin>
                     <li>
                         <button className="--btn --btn-primary">
                             <Link to='/dashboard'>Dashboard</Link>
                         </button>
                     </li>
+                    </ShowOnLogin>
                 </ul>
             </nav>
 
