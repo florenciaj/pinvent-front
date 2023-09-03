@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-        <Route path="/reset-password/:resetPassword" element={<ResetPassword />}></Route>
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />}></Route>
         <Route path="/dashboard" element={
           <Sidebar>
             <Layout>

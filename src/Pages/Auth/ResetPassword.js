@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { MdPassword } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Card from '../../Component/Card/Card';
+import { resetPasswordUser } from '../../Service/AuthService';
 import styles from './Auth.module.scss';
 
 const initialState = {
@@ -12,14 +14,34 @@ const initialState = {
 const ResetPassword = () => {
     const [formData, setFormData] = useState(initialState);
     const { newPassword, confirmPassword } = formData;
+    const { resetToken } = useParams();
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-    
-    const reset = (e) => {
+
+    const reset = async (e) => {
         e.preventDefault();
+
+        if (newPassword.length < 6) {
+            return toast.error("Passwords must be up to 6 characters");
+        }
+        if (newPassword !== confirmPassword) {
+            return toast.error("Passwords do not match");
+        }
+
+        const userData = {
+            newPassword,
+            confirmPassword,
+        };
+
+        try {
+            const data = await resetPasswordUser(userData, resetToken);
+            toast.success(data.message);
+        } catch (error) {
+            toast.error('Could not reset password');
+        }
     };
 
     return (
