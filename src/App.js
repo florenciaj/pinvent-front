@@ -12,6 +12,7 @@ import Register from "./Pages/Auth/Register";
 import ResetPassword from "./Pages/Auth/ResetPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
+import AddProduct from './Pages/Product/AddProduct';
 import { SET_LOGIN } from './Redux/Feature/Auth/Auth';
 import { getLoginStatus } from './Service/AuthService';
 
@@ -41,6 +42,13 @@ function App() {
           <Sidebar>
             <Layout>
               <Dashboard />
+            </Layout>
+          </Sidebar>
+        }></Route>
+          <Route path="/add-product" element={
+          <Sidebar>
+            <Layout>
+              <AddProduct />
             </Layout>
           </Sidebar>
         }></Route>
