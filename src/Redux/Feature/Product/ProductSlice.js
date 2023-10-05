@@ -9,6 +9,9 @@ const initialState = {
     isSuccess: false,
     isLoading: false,
     message: '',
+    totalStoreValue: 0,
+    outOfStock: 0,
+    category: [],
 }
 
 export const createNewProduct = createAsyncThunk(
@@ -46,7 +49,17 @@ const ProductSlice = createSlice({
     initialState,
     reducers: {
         CALCULATE_STORE_VALUE(state, action) {
-            console.log('store value');
+            const products = action.payload;
+            const storeProducts = [];
+            products.map(item => {
+                const { price, amount } = item;
+                const productValue = price * amount;
+                return storeProducts.push(productValue);
+            });
+            const totalValue = storeProducts.reduce((a, b) => {
+                return a + b;
+              }, 0);
+            state.totalStoreValue = totalValue;
         }
     },
     extraReducers: (builder) => {
@@ -84,5 +97,6 @@ const ProductSlice = createSlice({
 export const { CALCULATE_STORE_VALUE } = ProductSlice.actions
 
 export const selectIsLoading = (state) => state.product.isLoading;
+export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
 
 export default ProductSlice.reducer

@@ -8,7 +8,7 @@ const Header = () => {
     const navigate = useNavigate();
     const name = useSelector(selectName);
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [setIsLoading] = useState(false);
 
     const logout = async () => {
         await logoutUser();

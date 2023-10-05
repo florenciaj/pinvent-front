@@ -8,7 +8,7 @@ import styles from './Auth.module.scss';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [setIsLoading] = useState(false);
 
     const handleInputChange = (e) => {
         setEmail(e.target.value);
