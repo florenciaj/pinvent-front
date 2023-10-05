@@ -1,7 +1,7 @@
 import React from 'react';
 import './Box.scss';
 
-const Box = ({ backgroundColor, title, count, icon }) => {
+const Box = ({ backgroundColor, title, amount, icon }) => {
     return (
         <div className={`info-box ${backgroundColor}`}>
             <span className="info-icon --color-white">
@@ -9,7 +9,7 @@ const Box = ({ backgroundColor, title, count, icon }) => {
             </span>
             <span className="info-text">
                 <p>{title}</p>
-                <h4>{count}</h4>
+                <h4>{amount}</h4>
             </span>
         </div>
     )

@@ -3,7 +3,7 @@ import { AiFillDollarCircle } from "react-icons/ai";
 import { BiCategory } from "react-icons/bi";
 import { BsCart4, BsCartX } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
-import { CALCULATE_STORE_VALUE, selectTotalStoreValue } from '../../../Redux/Feature/Product/ProductSlice';
+import { CALCULATE_OUT_OF_STOCK, CALCULATE_STORE_VALUE, selectOutOfStock, selectTotalStoreValue } from '../../../Redux/Feature/Product/ProductSlice';
 import Box from '../../Box/Box';
 import './ProductSumarry.scss';
 
@@ -21,9 +21,11 @@ export const formatNumbers = (x) => {
 const ProductSummary = ({ products }) => {
   const dispatch = useDispatch();
   const totalStoreValue = useSelector(selectTotalStoreValue);
+  const totalOutOfStock = useSelector(selectOutOfStock);
 
   useEffect(() => {
     dispatch(CALCULATE_STORE_VALUE(products));
+    dispatch(CALCULATE_OUT_OF_STOCK(products));
   }, [dispatch, products])
 
   return (
@@ -32,8 +34,8 @@ const ProductSummary = ({ products }) => {
       <div className="info-summary">
         <Box icon={productIcon} title={'Total products'} quantity={products.length} backgroundColor='card1'></Box>
         <Box icon={earningIcon} title={'Total store value'} quantity={'0'} backgroundColor='card2'></Box>
-        <Box icon={outOfStockIcon} title={'Out of stock'} quantity={'0'} backgroundColor='card3'></Box>
-        <Box icon={categoryIcon} title={'Total categories'} quantity={'0'} count={`$${formatNumbers(totalStoreValue.toFixed(2))}  `} backgroundColor='card4'></Box>
+        <Box icon={outOfStockIcon} title={'Out of stock'} quantity={'0'} amount={totalOutOfStock} backgroundColor='card3'></Box>
+        <Box icon={categoryIcon} title={'Total categories'} quantity={'0'} amount={`$${formatNumbers(totalStoreValue.toFixed(2))}  `} backgroundColor='card4'></Box>
       </div>
     </div>
   )
