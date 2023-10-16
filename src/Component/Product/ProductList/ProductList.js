@@ -5,6 +5,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FILTER_PRODUCTS, selectFilteredProducts } from '../../../Redux/Feature/Product/FilterSlice';
 import { deleteProduct, getProducts } from '../../../Redux/Feature/Product/ProductSlice';
 import { SpinnerImg } from "../../Loader/Loader";
@@ -46,7 +47,7 @@ const ProductList = ({ products, isLoading }) => {
       ],
     });
   };
-  
+
   //   Begin Pagination
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -115,10 +116,14 @@ const ProductList = ({ products, isLoading }) => {
                         <td>${price * amount}</td>
                         <td className='icons'>
                           <span>
-                            <AiOutlineEye size={25} color={'purple'}></AiOutlineEye>
+                            <Link to={`/product/detail/${_id}`}>
+                              <AiOutlineEye size={25} color={'purple'}></AiOutlineEye>
+                            </Link>
                           </span>
                           <span>
-                            <FaEdit size={20} color={'green'}></FaEdit>
+                            <Link to={`/product/edit/${_id}`}>
+                              <FaEdit size={20} color={'green'}></FaEdit>
+                            </Link>
                           </span>
                           <span>
                             <FaTrashAlt size={20} color={'red'} onClick={() => confirmDelete(_id)}></FaTrashAlt>

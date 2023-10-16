@@ -59,6 +59,36 @@ export const deleteProduct = createAsyncThunk(
     }
 );
 
+export const updateProduct = createAsyncThunk(
+    "product/update",
+    async ({ id, formData }, thunkAPI) => {
+        try {
+            return await ProductService.updateProduct(id, formData);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            toast.error(message);
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+export const getProduct = createAsyncThunk(
+    "products/getProduct",
+    async (id, thunkAPI) => {
+        try {
+            return await ProductService.getProduct(id);
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.toString();
+            toast.error(message);
+            return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
 const ProductSlice = createSlice({
     name: 'product',
     initialState,
@@ -144,12 +174,39 @@ const ProductSlice = createSlice({
                 state.message = action.payload;
                 toast.error(action.payload);
             })
+            .addCase(updateProduct.pending, (state) => { state.isLoading = true; })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                toast.success('Product updated')
+            })
+            .addCase(updateProduct.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+                toast.error(action.payload);
+            })
+            .addCase(getProduct.pending, (state) => { state.isLoading = true; })
+            .addCase(getProduct.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                state.product = action.payload
+            })
+            .addCase(getProduct.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.message = action.payload;
+                toast.error(action.payload);
+            })
     }
 });
 
 export const { CALCULATE_STORE_VALUE, CALCULATE_OUT_OF_STOCK, CALCULATE_CATEGORY } = ProductSlice.actions
 
 export const selectIsLoading = (state) => state.product.isLoading;
+export const selectProduct = (state) => state.product.product;
 export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
 export const selectOutOfStock = (state) => state.product.outOfStock;
 export const selectCategory = (state) => state.product.category;

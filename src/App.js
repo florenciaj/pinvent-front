@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from "./Component/Layout/Layout";
+import ProductDetail from './Component/Product/ProductDetail/ProductDetail';
 import Sidebar from "./Component/Sidebar/Sidebar";
 import ForgotPassword from "./Pages/Auth/ForgotPassword";
 import Login from "./Pages/Auth/Login";
@@ -13,6 +14,7 @@ import ResetPassword from "./Pages/Auth/ResetPassword";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import AddProduct from './Pages/Product/AddProduct';
+import EditProduct from './Pages/Product/EditProduct';
 import { SET_LOGIN } from './Redux/Feature/Auth/Auth';
 import { getLoginStatus } from './Service/AuthService';
 
@@ -22,7 +24,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function loginStatus(){
+    async function loginStatus() {
       const status = await getLoginStatus();
       dispatch(SET_LOGIN(status));
     }
@@ -45,10 +47,24 @@ function App() {
             </Layout>
           </Sidebar>
         }></Route>
-          <Route path="/add-product" element={
+        <Route path="/product/create" element={
           <Sidebar>
             <Layout>
               <AddProduct />
+            </Layout>
+          </Sidebar>
+        }></Route>
+        <Route path="/product/detail/:id" element={
+          <Sidebar>
+            <Layout>
+              <ProductDetail />
+            </Layout>
+          </Sidebar>
+        }></Route>
+               <Route path="/product/edit/:id" element={
+          <Sidebar>
+            <Layout>
+              <EditProduct />
             </Layout>
           </Sidebar>
         }></Route>
