@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { AiOutlineEye } from "react-icons/ai";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
 import { FILTER_PRODUCTS, selectFilteredProducts } from '../../../Redux/Feature/Product/FilterSlice';
+import { deleteProduct, getProducts } from '../../../Redux/Feature/Product/ProductSlice';
 import { SpinnerImg } from "../../Loader/Loader";
 import Search from "../../Search/Search";
 import './ProductList.scss';
@@ -23,6 +26,27 @@ const ProductList = ({ products, isLoading }) => {
     return text;
   };
 
+  const delProduct = (id) => {
+    dispatch(deleteProduct(id));
+    dispatch(getProducts());
+  };
+
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: "Delete product",
+      message: "Are you sure you want to delete this product?",
+      buttons: [
+        {
+          label: "Delete",
+          onClick: () => delProduct(id),
+        },
+        {
+          label: "Cancel",
+        },
+      ],
+    });
+  };
+  
   //   Begin Pagination
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -97,7 +121,7 @@ const ProductList = ({ products, isLoading }) => {
                             <FaEdit size={20} color={'green'}></FaEdit>
                           </span>
                           <span>
-                            <FaTrashAlt size={20} color={'red'}></FaTrashAlt>
+                            <FaTrashAlt size={20} color={'red'} onClick={() => confirmDelete(_id)}></FaTrashAlt>
                           </span>
                         </td>
                       </tr>

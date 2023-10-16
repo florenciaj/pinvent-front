@@ -11,12 +11,17 @@ export const createProduct = async (formData) => {
 export const getProducts = async () => {
     const response = await axios.get(API_URL);
     return response.data;
+}
 
+export const deleteProduct = async (id) => {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
 }
 
 const ProductService = {
     createProduct,
-    getProducts
+    getProducts,
+    deleteProduct
 }
 
 export default ProductService;
