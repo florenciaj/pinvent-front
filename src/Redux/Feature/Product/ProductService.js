@@ -5,7 +5,10 @@ const API_URL = `${BACKEND_URL}/product`;
 
 export const createProduct = async (formData) => {
     const response = await axios.post(API_URL, formData);
-    return response.data;
+    return {
+        type: 'PRODUCT_CREATED',
+        payload: response.data
+    };
 }
 
 export const getProducts = async () => {

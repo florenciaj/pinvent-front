@@ -45,8 +45,9 @@ const AddProduct = () => {
         return sku;
     };
 
-    const saveProduct = async(e) => {
+    const saveProduct = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append('name', name);
         formData.append('sku', generateSKU(category));
