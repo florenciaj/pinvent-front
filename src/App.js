@@ -15,6 +15,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import Home from "./Pages/Home/Home";
 import AddProduct from './Pages/Product/AddProduct';
 import EditProduct from './Pages/Product/EditProduct';
+import Profile from './Pages/Profile/Profile';
 import { SET_LOGIN } from './Redux/Feature/Auth/Auth';
 import { getLoginStatus } from './Service/AuthService';
 
@@ -61,10 +62,17 @@ function App() {
             </Layout>
           </Sidebar>
         }></Route>
-               <Route path="/product/edit/:id" element={
+        <Route path="/product/edit/:id" element={
           <Sidebar>
             <Layout>
               <EditProduct />
+            </Layout>
+          </Sidebar>
+        }></Route>
+        <Route path="/profile" element={
+          <Sidebar>
+            <Layout>
+              <Profile />
             </Layout>
           </Sidebar>
         }></Route>

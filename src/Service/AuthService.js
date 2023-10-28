@@ -88,3 +88,15 @@ export const getLoginStatus = async () => {
         toast.error(message);
     }
 };
+
+export const getUser = async () => {
+    try {
+        const response = await axios.get(`${BACKEND_URL}/user`);
+        return response.data;
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString();
+        toast.error(message);
+    }
+};
